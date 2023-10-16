@@ -13,7 +13,7 @@ namespace Time_And_Sound___4_
         private bool visible = false;
         Rectangle bombRect, boomRect;
         SpriteFont timeFont;
-        float seconds = 0, startTime = 0, time = 5;
+        float seconds = 0, startTime = 0, time = 15;
         MouseState mouseState;
         SoundEffect boom;
 
