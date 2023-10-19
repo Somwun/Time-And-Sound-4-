@@ -9,8 +9,8 @@ namespace Time_And_Sound___4_
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Texture2D _bomb, _boom;
-        private bool visible = false;
+        private Texture2D _bomb, _boom, _button, _wires;
+        private bool visible = false, bombActive = true;
         Rectangle bombRect, boomRect;
         SpriteFont timeFont;
         float seconds = 0, startTime = 0, time = 15;
@@ -45,17 +45,22 @@ namespace Time_And_Sound___4_
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             mouseState = Mouse.GetState();
-            if (mouseState.LeftButton == ButtonState.Pressed) //When left click, reset timer
-                startTime = (float)gameTime.TotalGameTime.TotalSeconds;
-            seconds = (float)gameTime.TotalGameTime.TotalSeconds - startTime;
-            if (seconds >= time-0.1) //When timer stops
+            if (mouseState.X <= 690 & mouseState.X >= 500 & mouseState.Y <= 210 & mouseState.Y >= 160 & mouseState.LeftButton == ButtonState.Pressed || mouseState.X >= 690 & mouseState.X <= 800 & mouseState.Y <= 260 & mouseState.Y >= 160 & mouseState.LeftButton == ButtonState.Pressed)
+                bombActive = false;
+            if (bombActive)
             {
-                boom.Play();
-                if (visible == false)
-                    visible = true;
-                else if (visible)
-                    Exit();
-                startTime = (float)gameTime.TotalGameTime.TotalSeconds;
+                if (mouseState.X <= 240 & mouseState.X >= 230 & mouseState.Y <= 145 & mouseState.Y >= 135 & mouseState.LeftButton == ButtonState.Pressed)
+                    startTime = (float)gameTime.TotalGameTime.TotalSeconds;       
+                seconds = (float)gameTime.TotalGameTime.TotalSeconds - startTime;
+                if (seconds >= time-0.1) //When timer stops
+                {
+                    boom.Play();
+                    if (visible == false)
+                        visible = true;
+                    else if (visible)
+                        Exit();
+                    startTime = (float)gameTime.TotalGameTime.TotalSeconds;
+                }
             }
             base.Update(gameTime);
         }
