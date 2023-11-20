@@ -42,8 +42,6 @@ namespace Time_And_Sound___4_
         }
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
             mouseState = Mouse.GetState();
             if (mouseState.X <= 690 & mouseState.X >= 500 & mouseState.Y <= 210 & mouseState.Y >= 160 & mouseState.LeftButton == ButtonState.Pressed || mouseState.X >= 690 & mouseState.X <= 800 & mouseState.Y <= 260 & mouseState.Y >= 160 & mouseState.LeftButton == ButtonState.Pressed)
                 bombActive = false;
@@ -74,9 +72,7 @@ namespace Time_And_Sound___4_
                 _spriteBatch.DrawString(timeFont, (time - seconds).ToString("00.0"), new Vector2(270, 200), Color.Black);
             }
             else if (visible == true)
-            {
                 _spriteBatch.Draw(_boom, boomRect, Color.White);
-            }
             _spriteBatch.End();
             base.Draw(gameTime);
         }
